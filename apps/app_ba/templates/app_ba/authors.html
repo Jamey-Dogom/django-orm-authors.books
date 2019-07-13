@@ -38,19 +38,23 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-5">
-                        <form action="/add_book" method="post">
+                        <form action="add_author" method="post">
                             {% csrf_token %}
                             <fieldset class="register">
                                 <p style="color: white;"></p>
 
-                                <p class="text-uppercase pull-center wh">ADD A BOOK!</p>
+                                <p class="text-uppercase pull-center wh">ADD AN AUTHOR!</p>
                                 <div class="form-group">
-                                    <input type="text" name="title" id="username" class="form-control input-lg"
-                                        placeholder="Title">
+                                    <input type="text" name="first_name" id="fname" class="form-control input-lg"
+                                        placeholder="First Name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="last_name" id="fname" class="form-control input-lg"
+                                        placeholder="Last Name">
                                 </div>
                                 <div class="form-group wh">
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" name = "desc" rows="3"
-                                        placeholder="Description"></textarea>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" name="notes"
+                                        rows="3" placeholder="Notes"></textarea>
                                 </div>
 
                                 <div>
@@ -73,20 +77,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for book in all_books %}
+                                {% for author in all_authors %}
                                 <tr>
-                                    <td class="blk">{{book.id}}</td>
-                                    <td>{{book.title}}</td>
-                                    <td>View</td>
-                                    {% endfor %}
+                                    <td class="blk">{{author.id}}</td>
+                                    <td>{{author.first_name}} {{author.last_name}}</td>
+                                    <td><a href="view_author/{{author.id}}">Views</a></td>
                                 </tr>
+                                    {% endfor %}
                             </tbody>
                         </table>
                     </div>
-
-                    </fieldset>
-                    </form>
-                </div>
             </div>
         </div>
         </div>
