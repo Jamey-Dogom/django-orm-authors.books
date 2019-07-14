@@ -37,26 +37,29 @@ def copy_dict_partial(source_dict, keys_to_remove=[]):
     return copy
 
 def add_author(request):
-    new_author = Author.objects.create(**copy_dict_partial(request.POST.dict()))
-    print(new_author)
+    new_author = Author.objects.create(first_name = request.POST["first_name"], last_name = request.POST['last_name'], notes = request.POST['notes'])
     return redirect("/authors")
 
-def copy_dict_partial(source_dict, keys_to_remove=[]):
-    copy = source_dict.copy()
-    if "csrfmiddlewaretoken" in copy: 
-        keys_to_remove.append("csrfmiddlewaretoken")
-    
-    for key in keys_to_remove:
-        del copy[key]
-    
-    return copy
-
-
 def display_author(request, author_id):
-        
+    all_books = Book.objects.all()
     author = Author.objects.get(id = author_id)
     context = {
-        "author": author
+        "author": author,
+        "authors_books": author.books.all(),
+        "all_books": all_books,
     }
+    return render(request, "app_ba/display_author.html", context)
 
-    render(request, "app_ba.display_author.html")
+def append_book(request, author_id):
+    auth = Author.objects.get(id = author_id)
+    bk = Book.objects.get(id = request.POST['book_titles'])
+    bk.authors.add(auth)
+
+    all_books = Book.objects.all()
+    author = Author.objects.get(id = author_id)
+    context = {
+        "author": author,
+        "authors_books": author.books.all(),
+        "all_books": all_books,
+    }
+    return render(request, "app_ba/display_author.html", context)
