@@ -5,29 +5,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="jquery/jquery.min.js"></script>
+    <!---- jquery link local dont forget to place this in first than other script or link or may not work ---->
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!---- boostrap.min link local ----->
+
+    <link rel="stylesheet" href="css/style.css">
+    <!---- boostrap.min link local ----->
+
+    <script src="js/bootstrap.min.js"></script>
+    <!---- Boostrap js link local ----->
+
+    <link rel="icon" href="images/icon.png" type="image/x-icon" />
+    <!---- Icon link local ----->
+
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <!---- Font awesom link local ----->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app_ba/css/style.css' %}">
     <title>Viewing Book</title>
+    <link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-    <h1>{{book.title}}</h1>
-    <h3>ID: {{book.id}}</h3>
-    <h3>Description:</h3>
-    <p>{{book.desc}}</p>
-    <h3>Authors</h3>
-    {% for auth in books_authors %}
-    <p>{{auth.first_name}}</p>
-    {% endfor %}
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div>
+                        <h1 class = "wh lg">{{book.title}}</h1>
+                        <h3 class = "wh">ID: {{book.id}}</h3>
+                        <h3 class = "wh">Description:</h3>
+                        <p class = "wh">{{book.desc}}</p>
+                        <h3 class = "wh">Authors</h3>
+                        {% for auth in books_authors %}
+                        <p class = "wh">{{auth.first_name}}</p>
+                        {% endfor %}
+                    </div>
 
-    <form action="/append_author_to_book/{{book.id}}" method="post">
-            {% csrf_token %}    
-        <select name="author_list" size="3">
-                {% for auth in all_authors %}
-                <option value = {{auth.id}}>{{auth.first_name}} {{auth.last_name}}</option>
-                {% endfor %}
-        </select>
-        <br><br>
-        <input type="submit">
-      </form>
-<a href="/">Go Home</a>
+                    <div>
+                        <form action="/append_author_to_book/{{book.id}}" method="post">
+                            {% csrf_token %}
+                            <select name="author_list" size="3">
+                                {% for auth in all_authors %}
+                                <option value={{auth.id}}>{{auth.first_name}} {{auth.last_name}}</option>
+                                {% endfor %}
+                            </select>
+                            <input type="submit" class="btn btn-lg cnt darkb ad" value="ADD">
+                    </div>
+                    </fieldset>
+                    </form>
+
+                    <button id = "home" type="submit" class="btn btn-lg cnt darkb wh"><a class = "at" href="/">Go Home</a></button>
+                </div>
 </body>
+
 </html>

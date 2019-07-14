@@ -5,29 +5,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="jquery/jquery.min.js"></script>
+    <!---- jquery link local dont forget to place this in first than other script or link or may not work ---->
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!---- boostrap.min link local ----->
+
+    <link rel="stylesheet" href="css/style.css">
+    <!---- boostrap.min link local ----->
+
+    <script src="js/bootstrap.min.js"></script>
+    <!---- Boostrap js link local ----->
+
+    <link rel="icon" href="images/icon.png" type="image/x-icon" />
+    <!---- Icon link local ----->
+
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <!---- Font awesom link local ----->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app_ba/css/style.css' %}">
     <title>Viewing Author</title>
+    <link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-    <h1>{{author.first_name}} {{author.last_name}}</h1>
-    <h3>ID: {{author.id}}</h3>
-    <h3>Notes:</h3>
-    <p>{{author.notes}}</p>
-    <h3>Books</h3>
-    {% for book in authors_books %}
-    <p>{{book.title}}</p>
-    {% endfor %}
-
-    <form action="/append_book_to_author/{{author.id}}" method="post">
-            {% csrf_token %}    
-        <select name="book_titles" size="3">
-                {% for book in all_books %}
-                <option value = {{book.id}}>{{book.title}}</option>
-                {% endfor %}
-        </select>
-        <br><br>
-        <input type="submit">
-      </form>
-<a href="/authors">Go Home</a>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div>
+                        <h1 class="wh lg">{{author.first_name}} {{author.last_name}}</h1>
+                        <h3 class="wh">ID: {{author.id}}</h3>
+                        <h3 class="wh">Notes:</h3>
+                        <p class="wh">{{author.notes}}</p>
+                        <h3 class="wh">Books</h3>
+                        {% for book in authors_books %}
+                        <p class="wh">{{book.title}}</p>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <form action="/append_book_to_author/{{author.id}}" method="post">
+                            {% csrf_token %}
+                            <select name="book_titles" size="3">
+                                {% for book in all_books %}
+                                <option value={{book.id}}>{{book.title}}</option>
+                                {% endfor %}
+                            </select>
+                            <br><br>
+                            <input type="submit" class="btn btn-lg cnt darkb ad" value="ADD">
+                        </form>
+                        <button id="home" type="submit" class="btn btn-lg cnt darkb wh"><a class="at" href="/">Go
+                                Home</a></button>
 </body>
+
 </html>

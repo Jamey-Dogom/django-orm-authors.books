@@ -3,8 +3,7 @@ body {
 }
 
 .container-fluid {
-    padding: 50px;
-    margin-top: 5%;
+    padding: 30px;
 }
 
 .container {
@@ -29,6 +28,11 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
     
+}
+
+.lg {
+    font-size: 40px;
+
 }
 
 .register {
@@ -97,4 +101,24 @@ body {
 
   .blk {
       color: black;
+  }
+
+  .at{
+      color: white;
+  }
+
+  #home {
+      margin-top: 50px;
+  }
+
+  a {
+      color: black;
+  }
+
+  .ad {
+      margin-bottom: 25px;
+  }
+
+  .lst {
+      margin-left: 35%;
   }
