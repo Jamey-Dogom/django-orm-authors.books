@@ -50,6 +50,33 @@ def display_author(request, author_id):
     }
     return render(request, "app_ba/display_author.html", context)
 
+def display_book(request, book_id):
+    all_authors = Author.objects.all()
+    book = Book.objects.get(id = book_id)
+    context = {
+        "book": book,
+        "books_authors": book.authors.all(),
+        "all_authors": all_authors,
+    }
+    return render(request, "app_ba/display_book.html", context)
+
+
+def append_author(request, book_id):
+    bk = Book.objects.get(id = book_id)
+    auth = Author.objects.get(id = request.POST['author_list'])
+    auth.books.add(bk)
+
+    all_authors = Author.objects.all()
+    book = Book.objects.get(id = book_id)
+    context = {
+        "book": book,
+        "books_authors": book.authors.all(),
+        "all_authors": all_authors,
+    }
+    return render(request, "app_ba/display_book.html", context)
+
+
+
 def append_book(request, author_id):
     auth = Author.objects.get(id = author_id)
     bk = Book.objects.get(id = request.POST['book_titles'])
